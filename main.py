@@ -1,0 +1,3 @@
+from pipeline_modules import generate_hwe_results
+
+generate_hwe_results.hwe_test()
