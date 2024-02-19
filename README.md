@@ -6,4 +6,6 @@ Need to install PPP
 
 --- installed ppp via conda (conda install -c jaredgk -c bioconda py-popgen)
 --- installed vcftools via conda (conda install bioconda::vcftools)
+--- installed plink2 via conda (conda install bioconda::plink2)
+--- installed admixture via conda (conda install bioconda::admixture)
 
