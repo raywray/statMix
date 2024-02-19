@@ -2,7 +2,7 @@
 
 Need to install PPP
 
---- install python 3.7.7
+--- install python 3.7.12
 
---- installed ppp via conda
+--- installed ppp via conda (conda install -c jaredgk -c bioconda py-popgen)
 
