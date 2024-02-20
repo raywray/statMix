@@ -9,4 +9,4 @@ Need to install PPP
 --- installed plink2 via conda (conda install bioconda::plink2)
 --- installed admixture via conda (conda install bioconda::admixture)
 -- installed gnu scientific library (conda install conda-forge::gsl)
---- installed faststructure (conda install bioconda::faststructure)
+--- installed ezstructure(pip install -U ezstructure)

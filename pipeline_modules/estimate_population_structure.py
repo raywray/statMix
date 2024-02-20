@@ -1,6 +1,6 @@
 import os
 
-from visulatization import generate_structure_plots
+from visulatization import generate_structure_plot
 
 plink_dir_path = f"output/plink"
 admixture_dir_path = f"output/admixture"
@@ -33,22 +33,25 @@ def find_k_least_cv(file_path):
         min_row = min(f, key=lambda line: float(line.split()[1]))
     return min_row.split()[0]
 
-
-def plot_structure(data_file):
-    generate_structure_plots.create_plot(data_file)
+def convert_vcf_to_bed(vcf_file, output_prefix):
+    os.system(
+            f"bash scripts/bash/convert_vcf_to_bim.sh {vcf_file} {output_prefix}"
+    )
 
 
 def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
     unique_output_prefix = f"{output_prefix}_structure"
     make_output_dirs()
-    # convert vcf to bim for admixture
-    os.system(
-        f"bash scripts/bash/convert_vcf_to_bim.sh {vcf_file} {unique_output_prefix}"
-    )
-
+    # TODO
+    # convert_vcf_to_bed(vcf_file, unique_output_prefix)
     # TODO
     # run_admixture(num_subpops_to_test, unique_output_prefix)
     best_fit_k = least_cv_error(unique_output_prefix)
     print(best_fit_k)
-    plot_structure(f"{admixture_dir_path}/{unique_output_prefix}.{best_fit_k}.Q")
+    # TODO run this in a loop to get all k values
+    generate_structure_plot.create_clustered_plot(
+        f"{plink_dir_path}/{unique_output_prefix}", 
+        f"{admixture_dir_path}/{unique_output_prefix}.{best_fit_k}.Q",
+        best_fit_k
+    )
    
