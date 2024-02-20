@@ -46,6 +46,7 @@ def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
         f"bash scripts/bash/convert_vcf_to_bim.sh {vcf_file} {unique_output_prefix}"
     )
 
+    # TODO
     # run_admixture(num_subpops_to_test, unique_output_prefix)
     best_fit_k = least_cv_error(unique_output_prefix)
     print(best_fit_k)
