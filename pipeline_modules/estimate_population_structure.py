@@ -33,10 +33,21 @@ def find_k_least_cv(file_path):
         min_row = min(f, key=lambda line: float(line.split()[1]))
     return min_row.split()[0]
 
+
 def convert_vcf_to_bed(vcf_file, output_prefix):
     os.system(
-            f"bash scripts/bash/convert_vcf_to_bim.sh {vcf_file} {output_prefix}"
+            f"bash scripts/bash/convert_vcf_to_bed.sh {vcf_file} {output_prefix}"
     )
+
+
+def create_structure_plots(num_subpops_to_test, output_prefix):
+    # TODO create one that keeps the populations in the same order so one can compare
+    for k in range(1, num_subpops_to_test + 1):
+        generate_structure_plot.create_clustered_plot(
+            f"{plink_dir_path}/{output_prefix}",
+            f"{admixture_dir_path}/{output_prefix}.{k}.Q",
+            k
+        )
 
 
 def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
@@ -47,11 +58,6 @@ def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
     # TODO
     # run_admixture(num_subpops_to_test, unique_output_prefix)
     best_fit_k = least_cv_error(unique_output_prefix)
-    print(best_fit_k)
-    # TODO run this in a loop to get all k values
-    generate_structure_plot.create_clustered_plot(
-        f"{plink_dir_path}/{unique_output_prefix}", 
-        f"{admixture_dir_path}/{unique_output_prefix}.{best_fit_k}.Q",
-        best_fit_k
-    )
+    print(best_fit_k) # TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
+    create_structure_plots(num_subpops_to_test, unique_output_prefix)
    
