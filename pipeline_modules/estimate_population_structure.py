@@ -19,6 +19,8 @@ def run_admixture(num_subpops_to_test, output_prefix):
         os.system(
             f"admixture --cv output/plink/{output_prefix}.bed {k} > {admixture_dir_path}/log{k}.out"
         )
+        # TODO switch out for PPP admixture when cv is added
+        # os.system(f"admixture.py --binary-ped-prefix {plink_dir_path}/{output_prefix} --pop {k} --cv > {admixture_dir_path}/log{k}.out")
     os.system(f"mv {output_prefix}* output/admixture")
 
 
@@ -35,9 +37,8 @@ def find_k_least_cv(file_path):
 
 
 def convert_vcf_to_bed(vcf_file, output_prefix):
-    os.system(
-            f"bash scripts/bash/convert_vcf_to_bed.sh {vcf_file} {output_prefix}"
-    )
+    os.system(f"vcf_format_conversions.py --vcf {vcf_file} --out-prefix {output_prefix} --out-format binary-ped")
+    os.system(f"mv {output_prefix}* {plink_dir_path}")
 
 
 def create_structure_plots(num_subpops_to_test, output_prefix):
@@ -56,8 +57,8 @@ def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
     # TODO
     # convert_vcf_to_bed(vcf_file, unique_output_prefix)
     # TODO
-    # run_admixture(num_subpops_to_test, unique_output_prefix)
-    best_fit_k = least_cv_error(unique_output_prefix)
-    print(best_fit_k) # TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
-    create_structure_plots(num_subpops_to_test, unique_output_prefix)
+    run_admixture(num_subpops_to_test, unique_output_prefix)
+    # best_fit_k = least_cv_error(unique_output_prefix)
+    # print(best_fit_k) # TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
+    # create_structure_plots(num_subpops_to_test, unique_output_prefix)
    
