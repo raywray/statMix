@@ -57,3 +57,4 @@ def create_clustered_plot(bed_prefix, q_file, k):
     ax.set_xticklabels(df_q_clustered.index, rotation=45, ha='right')
     ax.legend(bbox_to_anchor=(1,1), fontsize='medium', labelspacing=0.5, frameon=False)    
     plt.savefig(f'output/figures/Admixture-K{k}.pdf', bbox_inches='tight')
+    df_q_clustered.to_csv(f"output/admixture/Admixture-K{k}.csv", index=True)
