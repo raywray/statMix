@@ -24,13 +24,29 @@ def create_clustered_plot(bed_prefix, q_file, k):
     df_q_clustered = df_q.iloc[idx]
     
     # Plotting
-    pal = sns.color_palette(['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9','#bc80bd', '#ccebc5', '#ffed6f'])
+    pal = sns.color_palette(
+        [
+            '#8dd3c7', 
+            '#ffffb3', 
+            '#bebada', 
+            '#fb8072', 
+            '#80b1d3', 
+            '#fdb462', 
+            '#b3de69', 
+            '#fccde5', 
+            '#d9d9d9',
+            '#bc80bd', 
+            '#ccebc5', 
+            '#ffed6f'
+        ]
+    )
     ax = df_q_clustered[names].plot.bar(
         stacked=True, 
-        color=pal, 
-        figsize=(25, 5), 
+        figsize=(25,5), 
         width=1, 
-        edgecolor='black'
+        color=pal, 
+        edgecolor='black',
+        linewidth=0.5
     )
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -40,5 +56,4 @@ def create_clustered_plot(bed_prefix, q_file, k):
     ax.set_ylabel("Ancestry Proportions", fontsize='medium')
     ax.set_xticklabels(df_q_clustered.index, rotation=45, ha='right')
     ax.legend(bbox_to_anchor=(1,1), fontsize='medium', labelspacing=0.5, frameon=False)    
-    plt.tight_layout()
     plt.savefig(f'output/figures/Admixture-K{k}.pdf', bbox_inches='tight')
