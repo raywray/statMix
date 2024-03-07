@@ -12,4 +12,9 @@ Need to install PPP
 --- installed ezstructure(pip install -U ezstructure)
 --- conda install conda-forge::pandas-plink
 --- conda install anaconda::seaborn
+--- pip install rpy2
+--- conda install bioconda::plink
+
+
+
 
