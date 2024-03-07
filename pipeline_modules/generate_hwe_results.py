@@ -1,21 +1,26 @@
 import os
-import pgpipe.vcf_calc as vcf_calc
 
-OUTPUT_PREFIX = "hwe"
+HWE_OUTPUT_DIR = f"output/hwe_results"
 
-output_dir_path = f"output/hwe_results"
+
+def execute_command(command):
+    os.system(command)
+
+
+def create_directory(dir_path):
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
+
 
 def hwe_test(vcf_file, p_value="0.05"):
-    # test for HWE
-    vcf_calc.run(vcf=vcf_file, calc_statistic="hardy-weinberg", out=OUTPUT_PREFIX)
-    # if want to switch above statement for bash, do this:
-    # os.system(f"vcf_calc.py --vcf {VCF_FILE_PATH} --calc-statistic hardy-weinberg --out {OUTPUT_PREFIX}")
-   
-    if not os.path.exists(output_dir_path): os.mkdir(output_dir_path)
+    # Step 1: create dirs
+    create_directory("output")
+    create_directory(HWE_OUTPUT_DIR)
 
-    # move output to the output directory
-    os.system(f"mv {OUTPUT_PREFIX}* {output_dir_path}")
+    # Step 2: build and run hwe command
+    hwe_command = f"vcf_calc.py --vcf {vcf_file} --calc-statistic hardy-weinberg --out {HWE_OUTPUT_DIR}/hwe_test"
+    execute_command(hwe_command)
 
-    # create a “reduced” file with only loci that are in HWE at a p-value cutoff of 0.05
-    os.system(f"vcftools --vcf {vcf_file} --hwe {p_value} --recode --stdout > {output_dir_path}/loci_in_hwe.vcf")
-
+    # Step 3: create a “reduced” file with only loci that are in HWE at a p-value cutoff of 0.05
+    hwe_reduced_command = f"vcftools --vcf {vcf_file} --hwe {p_value} --recode --stdout > {HWE_OUTPUT_DIR}/loci_in_hwe.vcf"
+    execute_command(hwe_reduced_command)

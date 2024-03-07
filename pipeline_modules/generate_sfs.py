@@ -82,16 +82,14 @@ def build_sfs(vcf_file, modelname):
 
 
 def run(vcf_file, k):
-    # make sure all directories exist
+    # Step 1: make sure all directories exist
     create_directory(OUTPUT_SFS_DIR)
     create_directory(OUTPUT_MODEL_DIR)
-    # Step 1: select best fit K  (from estimate pop structure) ✓
+    
+    # Step 2: select best fit K  (from estimate pop structure) ✓
 
-    # Step 2: create model file for that K
+    # Step 3: create model file for that K
     modelname = create_model_file(k)
 
-    # Step 3: use that to create SFS with PPP
+    # Step 4: use that to create SFS with PPP
     build_sfs(vcf_file, modelname)
-
-
-run("data/hops.vcf", 4)

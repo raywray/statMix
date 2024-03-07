@@ -8,5 +8,8 @@ Need to install PPP
 --- installed vcftools via conda (conda install bioconda::vcftools)
 --- installed plink2 via conda (conda install bioconda::plink2)
 --- installed admixture via conda (conda install bioconda::admixture)
--- installed gnu scientific library (conda install conda-forge::gsl)
+--- installed gnu scientific library (conda install conda-forge::gsl)
 --- installed ezstructure(pip install -U ezstructure)
+--- conda install conda-forge::pandas-plink
+--- conda install anaconda::seaborn
+
