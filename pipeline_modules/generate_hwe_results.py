@@ -2,7 +2,6 @@ import os
 
 HWE_OUTPUT_DIR = f"output/hwe_results"
 
-
 def execute_command(command):
     os.system(command)
 
