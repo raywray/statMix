@@ -3,16 +3,6 @@ import os
 OUTPUT_DIR = "output"
 STATS_DIR = f"{OUTPUT_DIR}/stats"
 
-"""
---calc-statistic <window-pi, 
-freq, het-fit, het-fis, hardy-weinberg>
-
---calc-statistic windowed-pi
-Requires: --statistic-window-size. . If --statistic-window-step is not given, it will default to the value of --statistic-window-size. Optional: --pop-file/--model.
-
---calc-statistic het-fis
-Requires: --pop-file/--model.
-"""
 
 def execute_command(command_list):
     command = " ".join(command_list)
@@ -92,6 +82,37 @@ def run(
     # site pi
     build_stats_command(
         calc_stat="site-pi",
+        vcf_file=vcf_file,
+        output_prefix=stat_output_prefix
+    )
+
+    # windowed pi
+    build_stats_command(
+        calc_stat="window-pi",
+        vcf_file=vcf_file,
+        statistic_window_size=statistic_window_size,
+        output_prefix=stat_output_prefix
+    )
+
+    # het-fis
+    build_stats_command(
+        calc_stat="het-fis",
+        vcf_file=vcf_file,
+        model_name=model_name,
+        model_file=model_file,
+        output_prefix=f"{stat_output_prefix}_fis"
+    )
+
+    # het-fit
+    build_stats_command(
+        calc_stat="het-fit",
+        vcf_file=vcf_file,
+        output_prefix=f"{stat_output_prefix}_fit"
+    )
+
+    # freq 
+    build_stats_command(
+        calc_stat="freq",
         vcf_file=vcf_file,
         output_prefix=stat_output_prefix
     )
