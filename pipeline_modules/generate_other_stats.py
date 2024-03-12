@@ -38,7 +38,7 @@ def build_stats_command(
     execute_command(command)
 
 
-def run(
+def get_stats(
         output_prefix, 
         vcf_file, 
         statistic_window_size, 
@@ -116,11 +116,3 @@ def run(
         vcf_file=vcf_file,
         output_prefix=stat_output_prefix
     )
-    
-run(
-    output_prefix="hops", 
-    vcf_file="data/hops.vcf", 
-    statistic_window_size=10000,
-    model_file="output/sfs/model_files/4Pop.model",
-    model_name="4Pop",
-)
