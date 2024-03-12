@@ -4,14 +4,11 @@ OUTPUT_DIR = "output"
 STATS_DIR = f"{OUTPUT_DIR}/stats"
 
 """
---calc-statistic <weir-fst, windowed-weir-fst, site-pi, window-pi, 
+--calc-statistic <weir-fst, site-pi, window-pi, 
 freq, het-fit, het-fis, hardy-weinberg>
 
 --calc-statistic weir-fst
 Requires: --pop-file/--model.
-
---calc-statistic windowed-weir-fst
-Requires: --pop-file/--model and --statistic-window-size. If --statistic-window-step is not given, it will default to the value of --statistic-window-size.
 
 --calc-statistic site-pi
 Optional: --pop-file/--model.
@@ -87,6 +84,15 @@ def run(
         statistic_window_size=statistic_window_size,
         model_file=model_file,
         model_name=model_name,
+    )
+
+    # weir fst
+    build_stats_command(
+        calc_stat="weir-fst",
+        vcf_file=vcf_file,
+        model_name=model_name,
+        model_file=model_file,
+        output_dir=f"{STATS_DIR}/weir_fst"
     )
     
 run(
