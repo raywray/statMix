@@ -1,2 +1,6 @@
 delete_results.sh
 *.log
+hlupulus/
+test_run/
+reset.sh
+data/hops_all.vcf
