@@ -9,18 +9,21 @@ freq, het-fit, het-fis, hardy-weinberg>
 
 --calc-statistic weir-fst
 Requires: --pop-file/--model.
+
 --calc-statistic windowed-weir-fst
 Requires: --pop-file/--model and --statistic-window-size. If --statistic-window-step is not given, it will default to the value of --statistic-window-size.
 
 --calc-statistic site-pi
 Optional: --pop-file/--model.
+
 --calc-statistic windowed-pi
 Requires: --statistic-window-size. . If --statistic-window-step is not given, it will default to the value of --statistic-window-size. Optional: --pop-file/--model.
+
 --calc-statistic het-fis
 Requires: --pop-file/--model.
 """
 
-def build_and_execute_command(command_list):
+def execute_command(command_list):
     command = " ".join(command_list)
     os.system(command)
 
@@ -29,22 +32,67 @@ def create_directory(dir_path):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
 
-def calc_tajimas_d(output_prefix, vcf_file, stat_window_size):
-    tajimas_d_command_list = [
+def build_stats_command(
+        calc_stat, 
+        output_prefix=None,
+        vcf_file=None, 
+        statistic_window_size=None, 
+        model_file=None, 
+        model_name=None, 
+        output_dir=None
+):
+
+    command = [
         "vcf_calc.py",
-        f"--vcf {vcf_file}",
-        f"--calc-statistic TajimaD",
-        f"--statistic-window-size {stat_window_size}",
-        f"--out-prefix {STATS_DIR}/{output_prefix}"
+        f"--calc-statistic {calc_stat}"
     ]
-    build_and_execute_command(tajimas_d_command_list)
+    if vcf_file: command.append(f"--vcf {vcf_file}")
+    if statistic_window_size: command.append(f"--statistic-window-size {statistic_window_size}")
+    if model_file: command.append(f"--model-file {model_file}")
+    if model_name: command.append(f"--model {model_name}")
+    
+    if output_prefix: command.append(f"--out-prefix {output_prefix}")
+    elif output_dir: command.append(f"--out-dir {output_dir}")
+   
+    execute_command(command)
 
 
-def run(output_prefix, vcf_file, statistic_window_size):
+def run(
+        output_prefix, 
+        vcf_file, 
+        statistic_window_size, 
+        model_file, 
+        model_name,
+):
+    stat_output_prefix = f"{STATS_DIR}/{output_prefix}"
+
     # create dirs
     create_directory(OUTPUT_DIR)
     create_directory(STATS_DIR)
-    # run all stats
-    calc_tajimas_d(output_prefix, vcf_file, statistic_window_size)
     
-run("hops", "data/hops.vcf", 10000)
+    # run all stats   
+    # calc tajimas d
+    build_stats_command(
+        calc_stat="TajimaD", 
+        output_prefix=stat_output_prefix, 
+        vcf_file=vcf_file, 
+        statistic_window_size=statistic_window_size
+    )
+   
+    # windowed weir fst
+    build_stats_command(
+        calc_stat="windowed-weir-fst",
+        output_dir=f"{STATS_DIR}/windowed_weir_fst",
+        vcf_file=vcf_file,
+        statistic_window_size=statistic_window_size,
+        model_file=model_file,
+        model_name=model_name,
+    )
+    
+run(
+    output_prefix="hops", 
+    vcf_file="data/hops.vcf", 
+    statistic_window_size=10000,
+    model_file="output/sfs/model_files/4Pop.model",
+    model_name="4Pop",
+)
