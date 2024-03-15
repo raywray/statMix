@@ -19,7 +19,7 @@ def create_directory(dir_path):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
 
-def compute_statistics(vcf_file, pop_file, output_prefix, window_size=None, bed_file=None, bypass_invariant_check=False):
+def compute_statistics(vcf_file, pop_file, output_prefix, window_size=None, bed_file=None):
     stat_command = [
         "pixy",
         f"--vcf {vcf_file}",
@@ -29,13 +29,12 @@ def compute_statistics(vcf_file, pop_file, output_prefix, window_size=None, bed_
     ]
     if window_size: stat_command.append(f"--window_size {window_size}")
     elif bed_file: stat_command.append(f"--bed_file {bed_file}")
-    if bypass_invariant_check: stat_command.append(f"--bypass_invariant_check yes")
     stat_command.append(f"--output_folder {PIXY_DIR}")
     stat_command.append(f"--output_prefix {output_prefix}")
 
     execute_command(stat_command)
 
-def run(vcf_file, pop_file, output_prefix, window_size, bed_file=None, bypass_invariant_check=False):
+def run(vcf_file, pop_file, output_prefix, window_size, bed_file=None):
     # make sure all directories are created
     create_directory(OUTPUT_DIR)
     create_directory(STATS_DIR)
@@ -49,7 +48,6 @@ def run(vcf_file, pop_file, output_prefix, window_size, bed_file=None, bypass_in
 
     # index vcf with tabix
     os.system(f"tabix {gz_vcf_file}.vcf.gz")
-    
 
     # if pop_file is a csv, convert to txt
     if utilities.get_file_extension(pop_file) == ".csv":
@@ -58,5 +56,5 @@ def run(vcf_file, pop_file, output_prefix, window_size, bed_file=None, bypass_in
         pop_file = pop_file_txt
 
     # get pixy stats
-    compute_statistics(f"{gz_vcf_file}.vcf.gz", pop_file, output_prefix, window_size, bed_file, bypass_invariant_check)
+    compute_statistics(f"{gz_vcf_file}.vcf.gz", pop_file, output_prefix, window_size, bed_file)
 

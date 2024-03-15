@@ -20,7 +20,7 @@ def get_file_base_name(file_path):
     # Split the file path into directory, base name, and extension
     directory, base_name = os.path.split(file_path)
     base_name_without_extension = os.path.splitext(base_name)[0]
-
     return os.path.join(directory, base_name_without_extension)
+
 
     
