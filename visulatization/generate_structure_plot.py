@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
+"""
+TODO potentially need to redo algorithm for grouping admixture
+"""
+
 def create_clustered_plot(bed_prefix, q_file, k):
     (bim, fam, bed) = read_plink(bed_prefix, verbose=False)
     df_q = pd.read_csv(q_file, sep=' ', header=None)
