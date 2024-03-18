@@ -16,6 +16,8 @@ Need to install PPP
 --- conda install bioconda::plink
 --- conda install -c conda-forge pixy
 --- conda install -c bioconda htslib
+--- conda install -c bioconda admixtools
+
 
 
 
