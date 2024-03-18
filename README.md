@@ -14,6 +14,8 @@ Need to install PPP
 --- conda install anaconda::seaborn
 --- pip install rpy2
 --- conda install bioconda::plink
+--- conda install -c conda-forge pixy
+--- conda install -c bioconda htslib
 --- conda install -c bioconda admixtools
 
 
