@@ -4,3 +4,5 @@ hlupulus/
 test_run/
 reset.sh
 data/hops_all.vcf
+test_run/
+.vscode/
