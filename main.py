@@ -1,5 +1,4 @@
-from pipeline_modules import generate_hwe_results, estimate_population_structure, generate_sfs, generate_other_stats, generate_pixy_stats
-
+from pipeline_modules import generate_hwe_results, estimate_population_structure, generate_sfs, generate_other_stats, generate_sfs_fsc
 VCF_FILE = "data/hops.vcf"
 OUTPUT_PREFIX = "hops"
 
@@ -15,8 +14,7 @@ def run_summary_stats():
         model_name="4Pop"
     )
 
-    # TODO for other analyses, NOT hops. 
-    # generate_pixy_stats.run(VCF_FILE, "output/sfs/model_files/assigned_populations.csv", OUTPUT_PREFIX, 10000)
+    generate_sfs_fsc.generate_sfs_for_fsc(VCF_FILE, f"output/sfs/model_files/{best_fit_k}Pop.model", f"{best_fit_k}Pop", OUTPUT_PREFIX)
 
 if __name__ == '__main__':
     run_summary_stats()

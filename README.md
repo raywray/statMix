@@ -1,9 +1,6 @@
 # hops_summary_stats
 
-Need to install PPP
-
 --- install python 3.7.12
-
 --- installed ppp via conda (conda install -c jaredgk -c bioconda py-popgen)
 --- installed vcftools via conda (conda install bioconda::vcftools)
 --- installed plink2 via conda (conda install bioconda::plink2)
@@ -18,6 +15,8 @@ Need to install PPP
 --- conda install -c bioconda htslib
 --- conda install -c bioconda admixtools
 
+how to install all packages: 
+`conda env create -f environment.yml`
 
 
 
