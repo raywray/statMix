@@ -47,9 +47,9 @@ def convert_vcf_to_bed(vcf_file, output_prefix):
 def create_structure_plots(num_subpops_to_test, output_prefix):
     # TODO create one that keeps the populations in the same order so one can compare
     for k in range(1, num_subpops_to_test + 1):
-        generate_structure_plot.create_clustered_plot(
-            f"{PLINK_DIR_PATH}/{output_prefix}",
+        generate_structure_plot.create_plots(
             f"{ADMIXTURE_DIR_PATH}/{output_prefix}.{k}.Q",
+            f"{PLINK_DIR_PATH}/{output_prefix}.nosex",
             k
         )
 

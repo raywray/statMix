@@ -10,8 +10,8 @@ def run_summary_stats():
         output_prefix=OUTPUT_PREFIX,
         vcf_file=VCF_FILE,
         statistic_window_size=10000,
-        model_file="output/sfs/model_files/4Pop.model",
-        model_name="4Pop"
+        model_file=f"output/sfs/model_files/{best_fit_k}Pop.model",
+        model_name=f"{best_fit_k}Pop"
     )
 
     generate_sfs_fsc.generate_sfs_for_fsc(VCF_FILE, f"output/sfs/model_files/{best_fit_k}Pop.model", f"{best_fit_k}Pop", OUTPUT_PREFIX)
