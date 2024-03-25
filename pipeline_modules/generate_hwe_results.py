@@ -11,7 +11,7 @@ def create_directory(dir_path):
         os.makedirs(dir_path)
 
 
-def run(vcf_file, p_value="0.05"):
+def run(vcf_file, p_value):
     # Step 1: create dirs
     create_directory("output")
     create_directory(HWE_OUTPUT_DIR)

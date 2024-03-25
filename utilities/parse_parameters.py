@@ -74,6 +74,18 @@ def parse():
         type=int,
         default=10000,
     )
+    parser.add_argument(
+        "--subpops-to-test",
+        help="Defines the number of subpopulations to test for population structure. Defaults to 10",
+        type=int,
+        default=10
+    )
+    parser.add_argument(
+        "--p-val",
+        help="Defines p value to be used with Hardy Weinberg Tests. Defaults to 0.05",
+        type=int,
+        default=0.05
+    )
 
     check_params(parser.parse_args())
     return parser.parse_args()

@@ -11,7 +11,6 @@ TODO change this file so that it's compatible with PPP pixy
 
 def execute_command(command_list):
     command = " ".join(command_list)
-    print(command)
     os.system(command)
 
 
@@ -36,7 +35,7 @@ def compute_statistics(vcf_file, pop_file, output_prefix, window_size=None, bed_
 
 def run(vcf_file, output_prefix, window_size, k):
     # get pop file
-    model_name = generate_model_files.run(k)
+    model_name, model_file = generate_model_files.run(k)
     pop_file = "output/model_files/assigned_populations.csv"
 
     # get bed file

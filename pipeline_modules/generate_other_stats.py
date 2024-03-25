@@ -40,8 +40,7 @@ def build_stats_command(
     execute_command(command)
 
 def get_model_files(k):
-    model_name = generate_model_files(k)
-    model_file = f"output/model_files/{k}Pop.model"
+    model_name, model_file = generate_model_files.run(k)
     return model_name, model_file
 
 
