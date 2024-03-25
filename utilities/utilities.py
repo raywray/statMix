@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import zipfile
 
 def csv_to_txt(csv_file, txt_file):
     # Read the CSV file
@@ -24,6 +25,11 @@ def get_file_base_name(file_path):
 
 def get_unique_prefix(prefix):
     return f"{prefix}_structure"
+
+def unzip_output(zip_file, extract_to_dir):
+    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+        zip_ref.extractall(extract_to_dir)
+    return
 
 
 

@@ -45,7 +45,7 @@ def run(vcf_file, k, output_prefix):
     create_directory(IMA_DIR)
 
     # get pop file
-    population_file = f"output/model_files/{generate_model_files.run(k)}.model"
+    pop_name, population_file = generate_model_files.run(k)
 
     # get bed file
     convert_vcf_to_bed.convert(vcf_file)

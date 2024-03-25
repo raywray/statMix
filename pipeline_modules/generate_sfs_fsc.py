@@ -1,6 +1,6 @@
 import os
 
-from utilities import generate_model_files
+from utilities import generate_model_files, utilities
 
 OUTPUT_DIR = "output"
 SFS_DIR = f"{OUTPUT_DIR}/sfs_for_fsc"
@@ -17,7 +17,7 @@ def create_directory(dir_path):
 def build_sfs_command(
     vcf_file, model_file, model_name, output_prefix
 ):
-    # TODO should we include this? --downsamplesizes <down sample sizes>
+    # TODO: should we include this? --downsamplesizes <down sample sizes>
     sfs_command = [
         "vcf_to_fastsimcoal.py",
         f"--vcf {vcf_file}",
@@ -30,8 +30,7 @@ def build_sfs_command(
 
 def run(vcf_file, k, output_prefix):
     # get model files
-    model_name = generate_model_files.run(k)
-    model_file = f"output/model_files/{model_name}.model"
+    model_name, model_file = generate_model_files.run(k)
    
     # create dirs
     create_directory(OUTPUT_DIR)
@@ -40,3 +39,5 @@ def run(vcf_file, k, output_prefix):
     output_basename = f"{SFS_DIR}/{output_prefix}"
 
     build_sfs_command(vcf_file, model_file, model_name, output_basename)
+
+    utilities.unzip_output(f"{output_basename}.zip", SFS_DIR)
