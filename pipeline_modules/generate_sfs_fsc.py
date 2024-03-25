@@ -23,7 +23,6 @@ def build_sfs_command(
         f"--modelname {model_name}",
         "--dim 1 2 m",
         f"--basename {output_prefix}",
-        "--folded" # I think it has to be folded for fsc
     ]
     execute_command(sfs_command)
 

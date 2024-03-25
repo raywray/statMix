@@ -47,9 +47,9 @@ def convert_vcf_to_bed(vcf_file, output_prefix):
 def create_structure_plots(num_subpops_to_test, output_prefix):
     # TODO create one that keeps the populations in the same order so one can compare
     for k in range(1, num_subpops_to_test + 1):
-        generate_structure_plot.create_clustered_plot(
-            f"{PLINK_DIR_PATH}/{output_prefix}",
+        generate_structure_plot.create_plots(
             f"{ADMIXTURE_DIR_PATH}/{output_prefix}.{k}.Q",
+            f"{PLINK_DIR_PATH}/{output_prefix}.nosex",
             k
         )
 
@@ -64,11 +64,13 @@ def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
     # convert vcf to bed file for admixture
     convert_vcf_to_bed(vcf_file, unique_output_prefix)
 
+    # run admixture
     run_admixture(num_subpops_to_test, unique_output_prefix)
 
     # find the best fitting k
-    best_fit_k = least_cv_error(unique_output_prefix)# TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
+    best_fit_k = least_cv_error(unique_output_prefix) # TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
 
     # plot the different admixtures
     create_structure_plots(num_subpops_to_test, unique_output_prefix)
+    
     return best_fit_k
