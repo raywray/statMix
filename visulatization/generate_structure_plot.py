@@ -18,7 +18,6 @@ def sort_df_by_pops_nocat(df):
         pop_sizes[pop] = len(temp)
     return temp_dfs, pop_sizes
 
-
 def sort_df_by_pops(df):
     temp_dfs = []
     for pop in sorted(df['assignment'].unique()):
@@ -41,10 +40,8 @@ def sort_data(proportions, k):
     df_sorted_q.to_csv(f"output/admixture/Admixture-K{k}.csv", index=True)
     return df_sorted_q, df_custom_sort
 
-
-def plot(df_custom_sort, df_sorted_q, k):
-
-    pal = sns.color_palette(
+def get_color_palette():
+    return sns.color_palette(
             [
                 '#8dd3c7', 
                 '#ffffb3', 
@@ -60,6 +57,13 @@ def plot(df_custom_sort, df_sorted_q, k):
                 '#ffed6f'
             ]
         )
+
+
+def plot(df_custom_sort, df_sorted_q, k):
+    # Get colors
+    pal = get_color_palette()
+   
+    # Generate Plot
     ax = df_custom_sort.plot.bar(stacked=True, 
                              figsize=(25,5), 
                              width=1,
@@ -74,6 +78,7 @@ def plot(df_custom_sort, df_sorted_q, k):
     ax.set_xticklabels(df_sorted_q.index, rotation=45, ha='right')
     ax.legend(bbox_to_anchor=(1,1), fontsize='medium', labelspacing=0.5, frameon=False)
     
+    # Save plot as a pdf
     ax.figure.savefig(f'output/figures/Admixture-K{k}.pdf', bbox_inches='tight')
 
 
@@ -81,18 +86,24 @@ def create_plots(q_file, label_file, k):
     # create output directory
     create_directory("output/figures")
     
+    # Organize data into a dataframe
+    # find individuals names
     labels = pd.read_table(label_file, header=None)
     individuals = labels[0]
-
+   
+   # get admixture results
     proportions = pd.read_csv(q_file, sep=' ', header=None)
-
     names = ["pop{}".format(i) for i in range(1, proportions.shape[1]+1)]
+    
+    # combine individuals' names with admixutre results
     proportions.columns = names
     proportions.insert(0, "Sample", individuals)
     proportions.set_index("Sample", inplace=True)
-
     proportions['assignment'] = proportions.idxmax(axis=1)
     
+    # Sort data
     df_sorted_q, df_custom_sort = sort_data(proportions, k)
+    
+    # Plot
     plot(df_custom_sort, df_sorted_q, k)
 

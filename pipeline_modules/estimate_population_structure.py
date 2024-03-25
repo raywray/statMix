@@ -64,11 +64,13 @@ def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
     # convert vcf to bed file for admixture
     convert_vcf_to_bed(vcf_file, unique_output_prefix)
 
+    # run admixture
     run_admixture(num_subpops_to_test, unique_output_prefix)
 
     # find the best fitting k
-    best_fit_k = least_cv_error(unique_output_prefix)# TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
+    best_fit_k = least_cv_error(unique_output_prefix) # TODO maybe instead of generating all the outputs, we just do a range around the best fit k?
 
     # plot the different admixtures
     create_structure_plots(num_subpops_to_test, unique_output_prefix)
+    
     return best_fit_k
