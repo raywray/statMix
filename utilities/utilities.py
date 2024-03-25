@@ -22,5 +22,9 @@ def get_file_base_name(file_path):
     base_name_without_extension = os.path.splitext(base_name)[0]
     return os.path.join(directory, base_name_without_extension)
 
+def get_unique_prefix(prefix):
+    return f"{prefix}_structure"
+
+
 
     

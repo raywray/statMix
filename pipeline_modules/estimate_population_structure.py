@@ -1,5 +1,6 @@
 import os
 from visulatization import generate_structure_plot
+from utilities import convert_vcf_to_bed, utilities
 
 PLINK_DIR_PATH = f"output/plink"
 ADMIXTURE_DIR_PATH = f"output/admixture"
@@ -37,11 +38,6 @@ def find_k_least_cv(file_path):
     with open(file_path) as f:
         min_row = min(f, key=lambda line: float(line.split()[1]))
     return min_row.split()[0]
-
-
-def convert_vcf_to_bed(vcf_file, output_prefix):
-    convert_command = f"vcf_format_conversions.py --vcf {vcf_file} --out-prefix {PLINK_DIR_PATH}/{output_prefix} --out-format binary-ped"
-    execute_command(convert_command)
     
 
 def create_structure_plots(num_subpops_to_test, output_prefix):
@@ -55,14 +51,13 @@ def create_structure_plots(num_subpops_to_test, output_prefix):
 
 
 def run(vcf_file, num_subpops_to_test=1, output_prefix=""):
-    unique_output_prefix = f"{output_prefix}_structure"
+    unique_output_prefix = utilities.get_unique_prefix(output_prefix)
     
     # create directories
-    create_directory(PLINK_DIR_PATH)
     create_directory(ADMIXTURE_DIR_PATH)
     
     # convert vcf to bed file for admixture
-    convert_vcf_to_bed(vcf_file, unique_output_prefix)
+    convert_vcf_to_bed.convert(vcf_file, unique_output_prefix)
 
     # run admixture
     run_admixture(num_subpops_to_test, unique_output_prefix)

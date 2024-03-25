@@ -1,5 +1,7 @@
 import os
 
+from utilities import convert_vcf_to_bed, utilities
+
 OUTPUT_DIR = "output"
 F_STATS_DIR = f"{OUTPUT_DIR}/f_stats"
 
@@ -69,7 +71,10 @@ def calculate_pattersons_d(eigenstrat_prefix):
     --admix-z-pop Chimp 
     """
 
-def run(bed_file_prefix):
+def run(vcf_file, output_prefix):
+    convert_vcf_to_bed(vcf_file, output_prefix)
+    bed_file_prefix = utilities.get_unique_prefix(output_prefix)
+
     # create directories
     create_directory(OUTPUT_DIR)
     create_directory(F_STATS_DIR)

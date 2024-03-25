@@ -1,5 +1,7 @@
 import os
 
+from utilities import generate_model_files
+
 OUTPUT_DIR = "output"
 STATS_DIR = f"{OUTPUT_DIR}/stats"
 
@@ -37,15 +39,20 @@ def build_stats_command(
    
     execute_command(command)
 
+def get_model_files(k):
+    model_name = generate_model_files(k)
+    model_file = f"output/model_files/{k}Pop.model"
+    return model_name, model_file
 
-def get_stats(
+
+def run(
         output_prefix, 
         vcf_file, 
-        statistic_window_size, 
-        model_file, 
-        model_name,
+        statistic_window_size,
+        k 
 ):
     stat_output_prefix = f"{STATS_DIR}/{output_prefix}"
+    model_name, model_file = get_model_files(k)
 
     # create dirs
     create_directory(OUTPUT_DIR)

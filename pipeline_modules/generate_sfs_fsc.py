@@ -1,5 +1,7 @@
 import os
 
+from utilities import generate_model_files
+
 OUTPUT_DIR = "output"
 SFS_DIR = f"{OUTPUT_DIR}/sfs_for_fsc"
 
@@ -26,7 +28,11 @@ def build_sfs_command(
     ]
     execute_command(sfs_command)
 
-def generate_sfs_for_fsc(vcf_file, model_file, model_name, output_prefix):
+def run(vcf_file, k, output_prefix):
+    # get model files
+    model_name = generate_model_files.run(k)
+    model_file = f"output/model_files/{model_name}.model"
+   
     # create dirs
     create_directory(OUTPUT_DIR)
     create_directory(SFS_DIR)
