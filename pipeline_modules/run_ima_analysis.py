@@ -1,4 +1,6 @@
 import os
+
+from utilities import generate_model_files, convert_vcf_to_bed, utilities
 OUTPUT_DIR = "output"
 IMA_DIR = f"{OUTPUT_DIR}/ima"
 
@@ -38,13 +40,21 @@ def run_ima_analysis(ima_input_file, species_prefix, max_pop_size=None, mig_rate
     execute_command(ima_command)
 
 
-def run(vcf_file, population_file, bed_file, species_prefix):
+def run(vcf_file, k, output_prefix):
     create_directory(OUTPUT_DIR)
     create_directory(IMA_DIR)
+
+    # get pop file
+    population_file = f"output/model_files/{generate_model_files.run(k)}.model"
+
+    # get bed file
+    convert_vcf_to_bed.convert(vcf_file)
+    bed_prefix = utilities.get_unique_prefix(output_prefix)
+    bed_file = f"output/plink/{bed_prefix}.bed"
     
     # Step 1: convert vcf to ima
-    vcf_to_ima(vcf_file, population_file, bed_file, species_prefix)
+    vcf_to_ima(vcf_file, population_file, bed_file, output_prefix)
 
     # Step 2: run ima
-    ima_file_name = f"{species_prefix}.ima" # TODO change this when you learn what the input file will look like
-    run_ima_analysis(ima_file_name, species_prefix)
+    ima_file_name = f"{output_prefix}.ima" # TODO change this when you learn what the input file will look like
+    run_ima_analysis(ima_file_name, output_prefix)

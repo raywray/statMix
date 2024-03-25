@@ -1,5 +1,5 @@
 import os
-from utilities import utilities
+from utilities import utilities, generate_model_files, convert_vcf_to_bed
 
 OUTPUT_DIR = "output"
 STATS_DIR = f"{OUTPUT_DIR}/stats"
@@ -34,7 +34,16 @@ def compute_statistics(vcf_file, pop_file, output_prefix, window_size=None, bed_
 
     execute_command(stat_command)
 
-def run(vcf_file, pop_file, output_prefix, window_size, bed_file=None):
+def run(vcf_file, output_prefix, window_size, k):
+    # get pop file
+    model_name = generate_model_files.run(k)
+    pop_file = "output/model_files/assigned_populations.csv"
+
+    # get bed file
+    convert_vcf_to_bed.convert(vcf_file)
+    bed_prefix = utilities.get_unique_prefix(output_prefix)
+    bed_file = f"output/plink/{bed_prefix}.bed"
+    
     # make sure all directories are created
     create_directory(OUTPUT_DIR)
     create_directory(STATS_DIR)

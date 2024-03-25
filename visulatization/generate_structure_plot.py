@@ -12,16 +12,16 @@ def create_directory(dir_path):
 def sort_df_by_pops_nocat(df):
     temp_dfs = []
     pop_sizes = {}
-    for pop in sorted(df['assignment'].unique()):
-        temp = df.loc[df['assignment'] == pop].sort_values(by=[pop], ascending=False)
+    for pop in sorted(df['Assigned_Pop'].unique()):
+        temp = df.loc[df['Assigned_Pop'] == pop].sort_values(by=[pop], ascending=False)
         temp_dfs.append(temp)
         pop_sizes[pop] = len(temp)
     return temp_dfs, pop_sizes
 
 def sort_df_by_pops(df):
     temp_dfs = []
-    for pop in sorted(df['assignment'].unique()):
-        temp = df.loc[df['assignment'] == pop].sort_values(by=[pop], ascending=False)
+    for pop in sorted(df['Assigned_Pop'].unique()):
+        temp = df.loc[df['Assigned_Pop'] == pop].sort_values(by=[pop], ascending=False)
         temp_dfs.append(temp)
     return pd.concat(temp_dfs)
 
@@ -30,7 +30,7 @@ def sort_data(proportions, k):
     df_sorted_q = sort_df_by_pops(proportions)
     
     # Order the sub_dfs based on population sizes
-    sorted_sub_dfs = sorted(sub_dfs, key=lambda x: pop_sizes[x['assignment'].iloc[0]], reverse=True)
+    sorted_sub_dfs = sorted(sub_dfs, key=lambda x: pop_sizes[x['Assigned_Pop'].iloc[0]], reverse=True)
     
     # Combine the sorted data frames into a single data frame
     df_custom_sort = pd.DataFrame()
@@ -99,7 +99,7 @@ def create_plots(q_file, label_file, k):
     proportions.columns = names
     proportions.insert(0, "Sample", individuals)
     proportions.set_index("Sample", inplace=True)
-    proportions['assignment'] = proportions.idxmax(axis=1)
+    proportions['Assigned_Pop'] = proportions.idxmax(axis=1) 
     
     # Sort data
     df_sorted_q, df_custom_sort = sort_data(proportions, k)
