@@ -36,18 +36,17 @@ def assign_inds_to_pops(admixture_csv_filename):
 def run(k):
     # make sure directory exists
     model_name = f"{k}Pop"
+    model_file_name = f"{OUTPUT_MODEL_DIR}/{model_name}.model"
 
     # if model files have already been made, return the modelname
     if not os.path.exists(OUTPUT_MODEL_DIR):
         os.makedirs(OUTPUT_MODEL_DIR)
     elif os.path.exists(OUTPUT_MODEL_DIR) and os.listdir(OUTPUT_MODEL_DIR):
-        return model_name
-
+        return model_name, model_file_name
     # Step 1: assign individuals to a population
     assign_inds_to_pops(f"output/admixture/Admixture-K{k}.csv")
 
     # Step 2: build command with output from step 1
-    model_file_name = f"{OUTPUT_MODEL_DIR}/{model_name}.model"
     create_model_command_list = [
         f"model_creator.py",
         f"--model {k}Pop",
