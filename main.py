@@ -30,13 +30,13 @@ def run_summary_stats():
             output_prefix=output_prefix,
             num_subpops_to_test=args.subpops_to_test,
         )
-        print(f"Best Fit K: {best_fit_k}")
     
     if "sfs" in args.analyses:
         generate_sfs.run(vcf_file=vcf_file, k=best_fit_k)
     
-    if "generic" in args.analyses:
+    if "generic_stats" in args.analyses:
         generate_other_stats.run(
+            output_prefix=output_prefix,
             vcf_file=vcf_file,
             statistic_window_size=args.statistic_window_size,
             k=best_fit_k,
@@ -62,6 +62,10 @@ def run_summary_stats():
     
     if "f_stats" in args.analyses:
         generate_f_stats.run(vcf_file=vcf_file, output_prefix=output_prefix)
+
+    # print this after all other analyses run
+    if "pop_structure" in args.analyses:
+         print(f"Best Fit K: {best_fit_k}")
 
 
 if __name__ == "__main__":
