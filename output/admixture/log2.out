@@ -16,23 +16,23 @@ Size of G: 98x27163
 Performing five EM steps to prime main algorithm
 1 (EM) 	Elapsed: 0.08	Loglikelihood: -2.21547e+06	(delta): 2.07705e+06
 2 (EM) 	Elapsed: 0.08	Loglikelihood: -2.14437e+06	(delta): 71107.2
-3 (EM) 	Elapsed: 0.078	Loglikelihood: -2.12608e+06	(delta): 18285
-4 (EM) 	Elapsed: 0.078	Loglikelihood: -2.11725e+06	(delta): 8834.5
-5 (EM) 	Elapsed: 0.078	Loglikelihood: -2.11244e+06	(delta): 4809.01
+3 (EM) 	Elapsed: 0.08	Loglikelihood: -2.12608e+06	(delta): 18285
+4 (EM) 	Elapsed: 0.08	Loglikelihood: -2.11725e+06	(delta): 8834.5
+5 (EM) 	Elapsed: 0.08	Loglikelihood: -2.11244e+06	(delta): 4809.01
 Initial loglikelihood: -2.11244e+06
 Starting main algorithm
-1 (QN/Block) 	Elapsed: 0.233	Loglikelihood: -1.96319e+06	(delta): 149247
-2 (QN/Block) 	Elapsed: 0.235	Loglikelihood: -1.90852e+06	(delta): 54674.3
-3 (QN/Block) 	Elapsed: 0.276	Loglikelihood: -1.88215e+06	(delta): 26364.8
-4 (QN/Block) 	Elapsed: 0.293	Loglikelihood: -1.86772e+06	(delta): 14437.4
-5 (QN/Block) 	Elapsed: 0.332	Loglikelihood: -1.86033e+06	(delta): 7387.76
+1 (QN/Block) 	Elapsed: 0.236	Loglikelihood: -1.96319e+06	(delta): 149247
+2 (QN/Block) 	Elapsed: 0.237	Loglikelihood: -1.90852e+06	(delta): 54674.3
+3 (QN/Block) 	Elapsed: 0.28	Loglikelihood: -1.88215e+06	(delta): 26364.8
+4 (QN/Block) 	Elapsed: 0.295	Loglikelihood: -1.86772e+06	(delta): 14437.4
+5 (QN/Block) 	Elapsed: 0.337	Loglikelihood: -1.86033e+06	(delta): 7387.76
 6 (QN/Block) 	Elapsed: 0.331	Loglikelihood: -1.85924e+06	(delta): 1087.69
 7 (QN/Block) 	Elapsed: 0.273	Loglikelihood: -1.85916e+06	(delta): 79.6405
 8 (QN/Block) 	Elapsed: 0.331	Loglikelihood: -1.85916e+06	(delta): 1.54976
-9 (QN/Block) 	Elapsed: 0.274	Loglikelihood: -1.85916e+06	(delta): 0.157973
+9 (QN/Block) 	Elapsed: 0.273	Loglikelihood: -1.85916e+06	(delta): 0.157973
 10 (QN/Block) 	Elapsed: 0.292	Loglikelihood: -1.85916e+06	(delta): 2.35504e-05
 Summary: 
-Converged in 10 iterations (3.619 sec)
+Converged in 10 iterations (3.641 sec)
 Loglikelihood: -1859158.435767
 Fst divergences between estimated populations: 
 	Pop0	
