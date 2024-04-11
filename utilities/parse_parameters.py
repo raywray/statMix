@@ -15,14 +15,14 @@ def parser_confirm_file():
 
 
 def check_params(args):
-    if not any(
-        analysis in args.analyses
-        for analysis in ["sfs", "generic_stats", "fsc", "ima", "pixy"]
+    analyses = ["sfs", "generic_stats", "fsc", "ima", "pixy"]
+    if (
+        any(analysis in args.analyses for analysis in analyses)
+        and "pop_structure" not in args.analyses
     ):
         raise IOError(
             "Must run Population Structure Analysis in order to run any of the other analyses."
         )
-    return
 
 
 def get_analyses_choices():
@@ -78,13 +78,13 @@ def parse():
         "--subpops-to-test",
         help="Defines the number of subpopulations to test for population structure. Defaults to 10",
         type=int,
-        default=10
+        default=10,
     )
     parser.add_argument(
         "--p-val",
         help="Defines p value to be used with Hardy Weinberg Tests. Defaults to 0.05",
         type=int,
-        default=0.05
+        default=0.05,
     )
 
     check_params(parser.parse_args())

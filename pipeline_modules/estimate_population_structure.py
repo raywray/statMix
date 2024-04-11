@@ -1,6 +1,6 @@
 import os
-from visulatization import generate_structure_plot
-from utilities import convert_vcf_to_bed, utilities
+from visulatization import generate_structure_plot, generate_cv_error_plot
+from utilities import convert_vcf_to_bed, utilities, estimate_least_cv_error
 
 PLINK_DIR_PATH = f"output/plink"
 ADMIXTURE_DIR_PATH = f"output/admixture"
@@ -28,10 +28,13 @@ def run_admixture(num_subpops_to_test, output_prefix):
 
 def least_cv_error(output_prefix):
     # estimate which has the least cross validation error
-    find_least_cv_command = f"bash scripts/bash/estimate_least_cv_error.sh {ADMIXTURE_DIR_PATH} {output_prefix}"
-    execute_command(find_least_cv_command)
+    estimate_least_cv_error.find_least_cv_error(ADMIXTURE_DIR_PATH, output_prefix)
+    cv_error_filepath = f"{ADMIXTURE_DIR_PATH}/{output_prefix}.cv.error"
+
+    # plot cv errors
+    generate_cv_error_plot.plot_cv_error(cv_error_filepath)
     
-    return find_k_least_cv(f"{ADMIXTURE_DIR_PATH}/{output_prefix}.cv.error")
+    return find_k_least_cv(cv_error_filepath)
     
 
 def find_k_least_cv(file_path):

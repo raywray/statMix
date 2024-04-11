@@ -89,7 +89,16 @@ def run(
     build_stats_command(
         calc_stat="site-pi",
         vcf_file=vcf_file,
-        output_prefix=stat_output_prefix
+        output_prefix=stat_output_prefix,
+    )
+
+    # site pi per pop
+    build_stats_command(
+        calc_stat="site-pi",
+        vcf_file=vcf_file,
+        model_file=model_file,
+        model_name=model_name,
+        output_dir=f"{STATS_DIR}/site_pi_per_pop"
     )
 
     # windowed pi
@@ -97,7 +106,17 @@ def run(
         calc_stat="window-pi",
         vcf_file=vcf_file,
         statistic_window_size=statistic_window_size,
-        output_prefix=stat_output_prefix
+        output_prefix=stat_output_prefix,
+    )
+    
+    # windowed pi per pop
+    build_stats_command(
+        calc_stat="window-pi",
+        vcf_file=vcf_file,
+        statistic_window_size=statistic_window_size,
+        model_file=model_file,
+        model_name=model_name,
+        output_dir=f"{STATS_DIR}/windowed_pi_per_pop"
     )
 
     # het-fis
