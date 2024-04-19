@@ -14,10 +14,10 @@ def get_file_extension(file_path):
     return os.path.splitext(file_path)[1]
 
 def change_extension(file_path, new_extension):
-    base_name = get_file_base_name(file_path)
+    base_name = get_file_base_path(file_path)
     return f"{base_name}.{new_extension}"
 
-def get_file_base_name(file_path):
+def get_file_base_path(file_path):
     # Split the file path into directory, base name, and extension
     directory, base_name = os.path.split(file_path)
     base_name_without_extension = os.path.splitext(base_name)[0]
