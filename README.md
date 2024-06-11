@@ -7,6 +7,7 @@ The statMix package is intended to be used to reduce compuational knowledge and 
 `git clone https://github.com/raywray/statMix.git`
 2. Install all necessary conda packages and create a conda environment (will need to have [anaconda](https://docs.anaconda.com/free/anaconda/install/) or [minicoda](https://docs.anaconda.com/free/miniconda/miniconda-install/) installed prior) with the following command: 
 `conda env create -f environment.yml`
+3. Activate the conda environment: `conda activate stat_mix_env`
 
 ### Use statMix
 All statMix needs is a vcf file of your population(s) and your choice of summary statistics to run (**NOTE:** in order to run `sfs`, `generic_stats`, `fsc`, `ima` or `pixy`, you **MUST** have `pop_structure` too)
