@@ -1,6 +1,4 @@
-# TODO: this doesn't work yet
-
-name: summary_stats_env
+name: stat_mix_env
 
 channels:
   - conda-forge
