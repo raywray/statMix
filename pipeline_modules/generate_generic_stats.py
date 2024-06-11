@@ -1,6 +1,20 @@
 import os
 import csv
 
+"""
+All commands and functions for 'generic' stats: 
+    - tajima's D
+    - windowed weir Fst
+    - weir Fst
+    - site pi
+    - site pi per population (from population structure analysis)
+    - windowed pi
+    - windowed pi per population (from population structure analysis)
+    - Fit
+    - Fis
+    - allele frequency
+"""
+
 from utilities import generate_model_files, utilities
 
 OUTPUT_DIR = "output"
@@ -96,7 +110,6 @@ def calculate_average_pi_per_pop(pop_pi_filepath):
 def calculate_pi(vcf_file, output_prefix):
     command = f"vcftools --vcf {vcf_file} --site-pi --out {output_prefix}"
     os.system(command)
-
 
 
 def run(

@@ -1,5 +1,11 @@
 import os
 
+"""
+All commands and functions for running an IMa3 analysis
+
+NOTE: unfinished
+"""
+
 from utilities import generate_model_files, convert_vcf_to_bed, utilities
 OUTPUT_DIR = "output"
 IMA_DIR = f"{OUTPUT_DIR}/ima"

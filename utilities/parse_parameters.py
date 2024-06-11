@@ -57,7 +57,7 @@ def parse():
         "--analyses",
         nargs="+",
         choices=get_analyses_choices(),
-        help="List of analyses to run from the VCF, separated by spaces.\ne.g. '--stats hwe generic' will result in Hardy Weinberg and generic summary statistic calculations.",
+        help="List of analyses to run from the VCF, separated by spaces.\ne.g. '--stats hwe generic_stats' will result in Hardy Weinberg and generic summary statistic calculations.",
         required=True,
     )
 

@@ -10,10 +10,40 @@ The statMix package is intended to be used to reduce compuational knowledge and 
 3. Activate the conda environment: `conda activate stat_mix_env`
 
 ### Use statMix
-All statMix needs is a vcf file of your population(s) and your choice of summary statistics to run (**NOTE:** in order to run `sfs`, `generic_stats`, `fsc`, `ima` or `pixy`, you **MUST** have `pop_structure` too)
+All statMix needs is a vcf file of your population(s) and your choice of summary statistics to run.
+
+Analyses options: 
+"hwe",
+"pop_structure",
+"sfs",
+"generic_stats",
+"fsc",
+"pixy",
+"ima",
+"f_stats",
+- `hwe`: Calculates Hardy Weinberg Equilibrium
+- `pop_structure`: Runs a full population structure analysis using admixture and creates plots
+- `sfs`: Generates SFS based on the population structure results
+- `generic_stats`: Calculates all 'generic' stats: 
+    - tajima's D
+    - windowed weir Fst
+    - weir Fst
+    - site pi
+    - site pi per population (from population structure analysis)
+    - windowed pi
+    - windowed pi per population (from population structure analysis)
+    - Fit
+    - Fis
+    - allele frequency
+- `fsc`: Generates SFS compatible for fastsimcoal analyses
+- `pixy`: Calculates statistics (pi, Fst, dxy) using pixy
+- `ima`: Runs an IMa3 analysis (**NOTE**: unfinished)
+- `f_stats`: Calculates Eigenstrat F statistics (**NOTE**: unfinished)
+
+(**NOTE:** in order to run `sfs`, `generic_stats`, `fsc`, `ima` or `pixy`, you **MUST** have `pop_structure` too). See `python3 statmix.py --help` for more information.
 
 #### Example Usage
-`python3 main.py --vcf tigers.vcf --out-prefix tigers --analyses hwe pop_structure sfs generic_stats fsc`
+`python3 statmix.py --vcf tigers.vcf --out-prefix tigers --analyses hwe pop_structure sfs generic_stats fsc`
 
 ## Output
 All results/visualizations can be found in respective subfolders of the `output` directory

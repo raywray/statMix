@@ -1,5 +1,9 @@
 import os
 
+"""
+All commands and functions to build an SFS compatible for fastsimcoal analyses
+"""
+
 from utilities import generate_model_files, utilities
 
 OUTPUT_DIR = "output"
