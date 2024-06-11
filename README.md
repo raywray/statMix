@@ -12,15 +12,6 @@ The statMix package is intended to be used to reduce compuational knowledge and 
 ### Use statMix
 All statMix needs is a vcf file of your population(s) and your choice of summary statistics to run.
 
-Analyses options: 
-"hwe",
-"pop_structure",
-"sfs",
-"generic_stats",
-"fsc",
-"pixy",
-"ima",
-"f_stats",
 - `hwe`: Calculates Hardy Weinberg Equilibrium
 - `pop_structure`: Runs a full population structure analysis using admixture and creates plots
 - `sfs`: Generates SFS based on the population structure results
