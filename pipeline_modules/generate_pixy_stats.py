@@ -1,4 +1,5 @@
 import os
+
 from utilities import utilities, generate_model_files, convert_vcf_to_bed
 
 OUTPUT_DIR = "output"

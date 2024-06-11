@@ -1,4 +1,5 @@
 import os
+
 from utilities import generate_model_files
 
 OUTPUT_DIR = "output"
