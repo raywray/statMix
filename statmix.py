@@ -1,10 +1,10 @@
 from utilities import parse_parameters
 
 from pipeline_modules import (
+    generate_generic_stats,
     generate_hwe_results,
     estimate_population_structure,
     generate_sfs,
-    generate_other_stats,
     generate_sfs_fsc,
     generate_f_stats,
     generate_pixy_stats,
@@ -34,7 +34,7 @@ def run_summary_stats():
         generate_sfs.run(vcf_file=vcf_file, k=best_fit_k)
     
     if "generic_stats" in args.analyses:
-        generate_other_stats.run(
+        generate_generic_stats.run(
             output_prefix=output_prefix,
             vcf_file=vcf_file,
             statistic_window_size=args.statistic_window_size,

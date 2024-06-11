@@ -1,5 +1,10 @@
 import os
 
+"""
+All commands and functions for generating SFS for the populations found in the 
+population structure analysis
+"""
+
 from utilities import generate_model_files
 
 OUTPUT_DIR = "output"
@@ -27,7 +32,6 @@ def build_sfs(vcf_file, modelname, model_file):
 
     # execute command
     execute_command(build_sfs_command)
-
 
 
 def run(vcf_file, k):

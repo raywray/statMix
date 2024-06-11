@@ -1,5 +1,11 @@
 import os
 
+"""
+All commands and functions for calculating Eigenstrat F statistics
+
+NOTE: unfinished
+"""
+
 from utilities import convert_vcf_to_bed, utilities
 
 OUTPUT_DIR = "output"
@@ -7,24 +13,6 @@ F_STATS_DIR = f"{OUTPUT_DIR}/f_stats"
 
 """
 TODO: fix this when have a vcf that will work to test this
-
-Using the hops vcf results in this error: 
-initLogger - WARNING: PPP, version 0.1.12
-    exp_handler - ERROR: fatalx:
-    bad chrom: 000000
-    Traceback (most recent call last):
-    File "/anaconda3/envs/hops_stats_env/bin/vcf_format_conversions.py", line 389, in <module>
-        run(**convert_argument_parser())
-    File "/anaconda3/envs/hops_stats_env/bin/vcf_format_conversions.py", line 384, in run
-        bed_to_eigenstrat(**vars(convert_args))
-    File "/anaconda3/envs/hops_stats_env/lib/python3.7/site-packages/pgpipe/eigenstrat_wrapper.py", line 226, in bed_to_eigenstrat
-        call_convertf(['-p', par_filename])
-    File "/anaconda3/envs/hops_stats_env/lib/python3.7/site-packages/pgpipe/eigenstrat_wrapper.py", line 83, in call_convertf
-        check_convertf_for_errors(convertf_stderr)
-    File "/anaconda3/envs/hops_stats_env/lib/python3.7/site-packages/pgpipe/eigenstrat_wrapper.py", line 42, in check_convertf_for_errors
-        raise Exception(convertf_stderr)
-    Exception: fatalx:
-    bad chrom: 000000
 """
 
 def execute_command(command_list):

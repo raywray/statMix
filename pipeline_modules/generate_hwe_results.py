@@ -1,5 +1,9 @@
 import os
 
+"""
+All commands and functions to calculate Hardy Weinberg Equilibrium
+"""
+
 HWE_OUTPUT_DIR = f"output/hwe_results"
 
 def execute_command(command):
