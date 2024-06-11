@@ -30,7 +30,6 @@ def run_summary_stats():
             output_prefix=output_prefix,
             num_subpops_to_test=args.subpops_to_test,
         )
-    
     if "sfs" in args.analyses:
         generate_sfs.run(vcf_file=vcf_file, k=best_fit_k)
     

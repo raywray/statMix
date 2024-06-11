@@ -49,7 +49,7 @@ def run(vcf_file, output_prefix, window_size, k):
     create_directory(PIXY_DIR)
 
     # convert vcf to vcf.gz
-    vcf_file_base_name = utilities.get_file_base_name(vcf_file)
+    vcf_file_base_name = utilities.get_file_base_path(vcf_file)
     gz_vcf_file = f"{vcf_file_base_name}_gz"
     os.system(f"cp {vcf_file_base_name}.vcf {gz_vcf_file}.vcf")
     os.system(f"bgzip {gz_vcf_file}.vcf")
