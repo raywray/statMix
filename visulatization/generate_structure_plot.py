@@ -48,18 +48,16 @@ def sort_data(proportions, k):
 def get_color_palette():
     return sns.color_palette(
         [
-            "#8dd3c7",
-            "#ffffb3",
-            "#bebada",
-            "#fb8072",
-            "#80b1d3",
-            "#fdb462",
-            "#b3de69",
-            "#fccde5",
-            "#d9d9d9",
-            "#bc80bd",
-            "#ccebc5",
-            "#ffed6f",
+            "#009E73", # green
+            "#F0E442", # yellow
+            "#CC79A7", # pink
+            "#56B4E9", # light blue
+            "#E69F00", # light orange
+            "#0072B2", # darker blue
+            "#D55E00", # dark orange
+            "#999999", # dark grey
+            "#332288", # midnight blue
+            "#E0E0E0", # light grey
         ]
     )
 
@@ -113,4 +111,3 @@ def create_plots(q_file, label_file, k):
 
     # Plot
     plot(df_custom_sort, df_sorted_q, k)
-
