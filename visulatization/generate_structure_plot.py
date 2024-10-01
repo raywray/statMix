@@ -1,6 +1,7 @@
 import seaborn as sns
 import pandas as pd
 import os
+import matplotlib.pyplot as plt
 
 FIGURES_DIR = "output/figures"
 
@@ -37,32 +38,30 @@ def sort_data(proportions, k):
     )
 
     # Combine the sorted data frames into a single data frame
-    df_custom_sort = pd.DataFrame()
-    for df in sorted_sub_dfs:
-        df_custom_sort = df_custom_sort.append(df, ignore_index=True)
+    combined_df = pd.concat(sorted_sub_dfs, ignore_index=False)
 
     df_sorted_q.to_csv(f"output/admixture/Admixture-K{k}.csv", index=True)
-    return df_sorted_q, df_custom_sort
+    return combined_df
 
 
 def get_color_palette():
     return sns.color_palette(
         [
             "#009E73", # green
-            "#F0E442", # yellow
+            "#E69F00", # light orange
             "#CC79A7", # pink
             "#56B4E9", # light blue
-            "#E69F00", # light orange
             "#0072B2", # darker blue
             "#D55E00", # dark orange
             "#999999", # dark grey
+            "#F0E442", # yellow
             "#332288", # midnight blue
             "#E0E0E0", # light grey
         ]
     )
 
 
-def plot(df_custom_sort, df_sorted_q, k):
+def plot(df_custom_sort, k):
     # Get colors
     pal = get_color_palette()
 
@@ -80,8 +79,8 @@ def plot(df_custom_sort, df_sorted_q, k):
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_visible(False)
-    ax.set_xticklabels(df_sorted_q.index, rotation=45, ha="right")
     ax.legend(bbox_to_anchor=(1, 1), fontsize="medium", labelspacing=0.5, frameon=False)
+    plt.xticks(rotation=45, ha='right')
 
     # Save plot as a pdf
     ax.figure.savefig(f"{FIGURES_DIR}/Admixture-K{k}.pdf", bbox_inches="tight")
@@ -107,7 +106,7 @@ def create_plots(q_file, label_file, k):
     proportions["Assigned_Pop"] = proportions.idxmax(axis=1)
 
     # Sort data
-    df_sorted_q, df_custom_sort = sort_data(proportions, k)
+    df_custom_sort = sort_data(proportions, k)
 
     # Plot
-    plot(df_custom_sort, df_sorted_q, k)
+    plot(df_custom_sort, k)
